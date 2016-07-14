@@ -2,10 +2,16 @@
 using System.Collections;
 
 public class Cube : MonoBehaviour
-{	
-	Cube[] surroundingCubes;
+{
+	CubeManager cubeManager;
+	public GameObject[] surroundingCubes;
 	public int rowIndex;
 	public int cellIndex;
+
+	void Awake ()
+	{
+		cubeManager = GameObject.FindWithTag("GameManager").GetComponent<CubeManager>();
+	}
 
 	void Update ()
 	{
@@ -14,7 +20,22 @@ public class Cube : MonoBehaviour
 
 	void GetSurroundingCubes ()
 	{
-
+		if (rowIndex != 0)
+		{
+			surroundingCubes[0] = cubeManager.cubeArray[rowIndex - 1, cellIndex];
+		}
+		if (cellIndex != cubeManager.cubeArray.GetLength(0) - 1)
+		{
+			surroundingCubes[1] = cubeManager.cubeArray[rowIndex, cellIndex + 1];
+		}
+		if (rowIndex != cubeManager.cubeArray.GetLength(0) - 1)
+		{
+			surroundingCubes[2] = cubeManager.cubeArray[rowIndex + 1, cellIndex];
+		}
+		if (cellIndex != 0)
+		{
+			surroundingCubes[3] = cubeManager.cubeArray[rowIndex, cellIndex - 1];
+		}
 	}
 
 	public void RecieveActionInput (Cube cube)
