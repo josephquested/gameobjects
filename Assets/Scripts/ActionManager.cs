@@ -6,7 +6,7 @@ public class ActionManager : MonoBehaviour
 	public Cube[] cubes;
 	public Cube activeCube;
 
-	public void RecieveActionInput ()
+	public void ReceiveActionInput ()
 	{
 		RaycastHit hitInfo = new RaycastHit();
 		bool hit = Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hitInfo);
@@ -17,7 +17,7 @@ public class ActionManager : MonoBehaviour
 		}
 	}
 
-	public void RecieveCubeInput (int cubeIndex)
+	public void ReceiveCubeInput (int cubeIndex)
 	{
 		activeCube = cubes[cubeIndex];
 	}
@@ -26,7 +26,7 @@ public class ActionManager : MonoBehaviour
 	{
 		if (activeCube != null)
 		{
-			cube.GetComponent<Cube>().RecieveActionInput(activeCube);
+			cube.GetComponent<Cube>().ReceiveActionInput(activeCube);
 		}
 	}
 }

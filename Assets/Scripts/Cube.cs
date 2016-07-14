@@ -38,7 +38,7 @@ public class Cube : MonoBehaviour
 		}
 	}
 
-	public void RecieveActionInput (Cube cube)
+	public void ReceiveActionInput (Cube cube)
 	{
 		React(cube);
 	}
@@ -56,7 +56,7 @@ public class Cube : MonoBehaviour
 			transform.position,
 			transform.rotation
 		);
-
+		cubeManager.cubeArray[rowIndex, cellIndex] = newCube;
 		TransferData(newCube.GetComponent<Cube>());
 		Destroy(gameObject);
 	}

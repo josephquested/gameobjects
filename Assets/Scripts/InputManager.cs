@@ -20,7 +20,7 @@ public class InputManager : MonoBehaviour
 	{
 		if (Input.GetMouseButtonDown(0))
 		{
-			actionManager.RecieveActionInput();
+			actionManager.ReceiveActionInput();
 		}
 	}
 
@@ -28,11 +28,8 @@ public class InputManager : MonoBehaviour
 	{
 		int keyCode = 666;
 	 	if (Input.GetKeyDown(KeyCode.Alpha0)) keyCode = 0;
-	 	if (Input.GetKeyDown(KeyCode.Alpha1)) {
-			keyCode = 1;
-			print("clicked 1!");
-		}
+	 	if (Input.GetKeyDown(KeyCode.Alpha1)) keyCode = 1;
 	 	if (Input.GetKeyDown(KeyCode.Alpha2)) keyCode = 2;
-		if (keyCode != 666) actionManager.RecieveCubeInput(keyCode);
+		if (keyCode != 666) actionManager.ReceiveCubeInput(keyCode);
 	}
 }
