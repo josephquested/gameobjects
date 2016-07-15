@@ -4,7 +4,8 @@ using System.Collections;
 public class Cube : MonoBehaviour
 {
 	CubeManager cubeManager;
-	public GameObject[] surroundingCubes;
+	public string type;
+	public GameObject[] neighbours;
 	public int rowIndex;
 	public int cellIndex;
 
@@ -15,27 +16,44 @@ public class Cube : MonoBehaviour
 
 	void Update ()
 	{
-		GetSurroundingCubes();
+		GetNeighbours();
+		ProcessNeighbours();
 	}
 
-	void GetSurroundingCubes ()
+	void GetNeighbours ()
 	{
 		if (rowIndex != 0)
 		{
-			surroundingCubes[0] = cubeManager.cubeArray[rowIndex - 1, cellIndex];
+			neighbours[0] = cubeManager.cubeArray[rowIndex - 1, cellIndex];
 		}
 		if (cellIndex != cubeManager.cubeArray.GetLength(0) - 1)
 		{
-			surroundingCubes[1] = cubeManager.cubeArray[rowIndex, cellIndex + 1];
+			neighbours[1] = cubeManager.cubeArray[rowIndex, cellIndex + 1];
 		}
 		if (rowIndex != cubeManager.cubeArray.GetLength(0) - 1)
 		{
-			surroundingCubes[2] = cubeManager.cubeArray[rowIndex + 1, cellIndex];
+			neighbours[2] = cubeManager.cubeArray[rowIndex + 1, cellIndex];
 		}
 		if (cellIndex != 0)
 		{
-			surroundingCubes[3] = cubeManager.cubeArray[rowIndex, cellIndex - 1];
+			neighbours[3] = cubeManager.cubeArray[rowIndex, cellIndex - 1];
 		}
+	}
+
+	void ProcessNeighbours ()
+	{
+		for (int i = 0; i <= 3; i++)
+		{
+			if (neighbours[i] != null)
+			{
+				ReactToNeighbour(neighbours[i].GetComponent<Cube>());
+			}
+		}
+	}
+
+	public virtual void ReactToNeighbour (Cube cube)
+	{
+
 	}
 
 	public void ReceiveActionInput (Cube cube)
@@ -43,10 +61,10 @@ public class Cube : MonoBehaviour
 		React(cube);
 	}
 
-	void React (Cube cube)
+	public virtual void React (Cube cube)
 	{
-		if (cube.name == "Brown Cube") Replace(cube);
-		if (cube.name == "Blue Cube") Replace(cube);
+		if (cube.type == "Brown") Replace(cube);
+		if (cube.type == "Blue") Replace(cube);
 	}
 
 	void Replace (Cube cube)
